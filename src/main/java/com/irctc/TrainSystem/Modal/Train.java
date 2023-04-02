@@ -1,25 +1,22 @@
-package com.irctc.TrainSystem;
+package com.irctc.TrainSystem.Modal;
 
+import com.irctc.TrainSystem.Modal.Passenger;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class FoodOrder {
+public class Train {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ticketId;
-    private int trainId;
-    private int price;
-
-    @ManyToOne
-    @JoinColumn
-    Passenger passenger;
-
+    private int id;
+    private String source;
+    private String destination;
 }

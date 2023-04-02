@@ -1,50 +1,45 @@
 package com.irctc.TrainSystem;
 
+import com.irctc.TrainSystem.Modal.FoodOrder;
+import com.irctc.TrainSystem.Modal.Passenger;
+import com.irctc.TrainSystem.Modal.Train;
+import com.irctc.TrainSystem.Service.PassengerService;
+import com.irctc.TrainSystem.Service.TrainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 public class Controller {
 
-    //POST API - Add a Passenger with ticketId, trainId, Date, Age, Gender
     @Autowired
-    Repository repository;
+    PassengerService passengerService;
     @Autowired
-    PassengerRepository passengerRepository;
-    @Autowired
-    FoodOrderRepository foodOrderRepository;
-    @PostMapping("/addpassenger")
-    public String addPassenger(@RequestBody Passenger passenger){
-        passengerRepository.save(passenger);
-        return "Passenger Added";
-    }
-    //POST API - Add a Train with trainNo, Source, Destination
-    @PostMapping("/addtrain")
-    public String addTrain(@RequestBody Train train){
-        repository.save(train);
-        return "Train Added";
-    }
-    @GetMapping("/getpassenger")
-    public int getPassenger(@RequestParam String x ,@RequestParam String y ,@RequestParam String date) {
-         int ans= passengerRepository.getPassengers(x,y,date);
-        return ans;
+    TrainService trainService;
 
+    @PostMapping("addtrain")
+    public String addTrain(@RequestBody Train train){
+        return trainService.addTrain(train);
     }
-//    @GetMapping("/getfemalepassenger")
-//    public int getFemalePassenger(int x , int y , String c)  {
-//        List<Passenger> passengerList = passengerRepository.FindFemaleByAgeAndDestination(x,y,c);
-//        return passengerList.size();
-//    }
-//    @GetMapping("/orderplaced")
-//    public int OrderPlaced(String d,int trainId){
-//        List<FoodOrder> foodOrderList = foodOrderRepository.findByTrainidAndDate(d,trainId);
-//        int total=0;
-//        for(FoodOrder foodOrder : foodOrderList){
-//            total += foodOrder.getPrice();
-//        }
-//        return total;
-//    }
+    @PostMapping("addpassenger")
+    public String addPassenger(@RequestBody Passenger passenger){
+        return passengerService.addPassenger(passenger);
+    }
+    @PostMapping("addfood")
+    public String addFood(@RequestBody FoodOrder foodOrder){
+        return passengerService.addFood(foodOrder);
+    }
+    @GetMapping("getpassengercount")
+    public int getPassengercount(@RequestParam String x , @RequestParam String y , @RequestParam String date){
+        return passengerService.getPassengercount(x,y,date);
+    }
+    @GetMapping("getpassengerfemale")
+    public int getFemalePassengercount(@RequestParam int x ,@RequestParam int y ,@RequestParam String dest){
+        return passengerService.getFemalePassengercount(x,y,dest);
+    }
+    @GetMapping("totalprice")
+    public int getTotalPrice(@RequestParam int trainid,@RequestParam String date){
+        return passengerService.getTotalPrice(trainid,date);
+    }
 }

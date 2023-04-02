@@ -1,11 +1,10 @@
-package com.irctc.TrainSystem;
+package com.irctc.TrainSystem.Repository;
 
+import com.irctc.TrainSystem.Modal.FoodOrder;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
 public interface FoodOrderRepository extends JpaRepository<FoodOrder,Integer> {
-    //List<FoodOrder> findByTrainidAndDate(String date, int id);
+
 }

@@ -1,24 +1,28 @@
-package com.irctc.TrainSystem;
+package com.irctc.TrainSystem.Modal;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Train {
+public class Passenger {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int trainId;
-    private String source;
-    private String destination;
+    private int id;
 
-    @OneToMany(mappedBy = "train",cascade = CascadeType.ALL)
-    List<Passenger> passengerList = new ArrayList<>();
+    private int trainid;
+    private String date;
+    private int age;
+    private String gender;
+
+
 }
